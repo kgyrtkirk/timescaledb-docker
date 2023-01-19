@@ -43,7 +43,7 @@ jobs:
           docker run -d -e POSTGRES_PASSWORD=${PGPASSWORD} --name smoketest-container smoketest-image
           for _ in {1..120}
           do
-            if [ -z "$(docker container ls -q --filter name=smoketest-container) ]
+            if [ -z "$(docker container ls -q --filter name=smoketest-container)" ]
             then
               echo "Smoketest container is not running"
               exit 1
