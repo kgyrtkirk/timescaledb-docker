@@ -27,6 +27,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: x
+      run: docker pull bitnami/postgresql:${PG_VER}
     - name: Build TimescaleDB bitnami
       run: make image ORG=$ORG PG_VER=pg${{ matrix.pg }} TS_VERSION=$TS_VERSION
       working-directory: bitnami
