@@ -39,7 +39,7 @@ jobs:
           set -xeu
           export PGPASSWORD=test1234
           docker container stop smoketest-container || true
-          docker container rm smoketest-container
+          docker container rm smoketest-container || true
           docker run -e POSTGRESQL_PASSWORD=${PGPASSWORD} --name smoketest-container smoketest-image
           for _ in {1..120}
           do
