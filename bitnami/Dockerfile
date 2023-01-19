@@ -27,9 +27,9 @@ FROM ${PREV_IMAGE} AS oldversions
 USER 0
 RUN set +o pipefail \
     && rm -vf $(pg_config --sharedir)/extension/timescaledb*mock*.sql \
-    && rm -vf $(ls -1t $(pg_config --pkglibdir)/timescaledb-tsl-*.so | head -n -5) \
-    && rm -vf $(ls -1t $(pg_config --pkglibdir)/timescaledb-[0-9]*.so | head -n -5) \
-    && rm -vf $(ls -1t $(pg_config --sharedir)/extension/timescaledb--*.sql | head -n -20) \
+    && rm -vf $(ls -1tr $(pg_config --pkglibdir)/timescaledb-tsl-*.so | head -n -5) \
+    && rm -vf $(ls -1tr $(pg_config --pkglibdir)/timescaledb-[0-9]*.so | head -n -5) \
+    && rm -vf $(ls -1tr $(pg_config --sharedir)/extension/timescaledb--*.sql | head -n -20) \
     && { ls $(pg_config --sharedir)/extension/timescaledb--*.sql \
       ; ls $(pg_config --pkglibdir)/timescaledb-*.so \
       ; : ; }

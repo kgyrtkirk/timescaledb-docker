@@ -36,6 +36,7 @@ jobs:
 
       - name: Run the smoke test
         run: |
+          set -xeu
           export PGPASSWORD=test1234
           docker container stop smoketest-container || true
           docker container rm smoketest-container
