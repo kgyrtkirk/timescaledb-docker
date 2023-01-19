@@ -31,7 +31,7 @@ jobs:
       run: make image ORG=$ORG PG_VER=pg${{ matrix.pg }} TS_VERSION=$TS_VERSION
       working-directory: bitnami
     - name: x
-      run: docker run --rm -it -e POSTGRESQL_PASSWORD=test  timescaledev/timescaledb:2.8.1-pg${PG_VER}-bitnami
+      run: docker run --rm -t -e POSTGRESQL_PASSWORD=test  timescaledev/timescaledb:2.8.1-pg${PG_VER}-bitnami
     - name: Tests
       uses: cloudposse/github-action-docker-compose-test-run@main
       with:
