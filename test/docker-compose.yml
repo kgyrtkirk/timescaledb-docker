@@ -1,7 +1,8 @@
 version: '3'
 services:
   db:
-    image: timescale/timescaledb:latest-pg12-bitnami
+    image: timescale/timescaledb:2.8.1-pg12-bitnami
+    #image: timescaledev/timescaledb:latest-pg12-bitnami
     environment:
     - POSTGRESQL_PASSWORD=test
   app:
@@ -10,8 +11,7 @@ services:
       context: .
       dockerfile: PgClientDockerfile
     environment:
-      WAIT_HOSTS: db:5432
-    environment:
+    - WAIT_HOSTS=db:5432
     - PGDATABASE=postgres
     - PGHOST=db
     - PGPORT=5432
