@@ -32,7 +32,7 @@ jobs:
           make image PG_VER=pg${{ matrix.pg }} TAG_VERSION=smoketest-image BETA=1
 
       - name: Install psql
-        run: apt install postgresql-client
+        run: sudo apt install postgresql-client
 
       - name: Run the smoke test
         run: |
