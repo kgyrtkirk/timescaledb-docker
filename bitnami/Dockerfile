@@ -35,6 +35,7 @@ ARG PG_VERSION
 
 LABEL maintainer="Timescale https://www.timescale.com"
 
+COPY docker-entrypoint-initdb.d/* /docker-entrypoint-initdb.d/
 COPY --from=tools /go/bin/* /usr/local/bin/
 COPY --from=oldversions /opt/bitnami/postgresql/lib/timescaledb-*.so /opt/bitnami/postgresql/lib/
 COPY --from=oldversions /opt/bitnami/postgresql/share/extension/timescaledb--*.sql /opt/bitnami/postgresql/share/extension/
@@ -83,6 +84,5 @@ RUN set -ex \
         /tmp/*               \
         /var/tmp/*
 RUN sed -r -i "s/[#]*\s*(shared_preload_libraries)\s*=\s*'(.*)'/\1 = 'timescaledb,\2'/;s/,'/'/" /opt/bitnami/postgresql/share/postgresql.conf.sample /opt/bitnami/postgresql/conf/postgresql.conf
-COPY docker-entrypoint-initdb.d/* /docker-entrypoint-initdb.d/
 
 USER 1001

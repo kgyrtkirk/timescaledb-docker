@@ -21,11 +21,6 @@ if [ -z "${POSTGRESQL_CONF_DIR:-}" ]; then
 	POSTGRESQL_CONF_DIR=${PGDATA}
 fi
 
-echo asdasd
-echo asdasd
-echo asdasd
-
-#bash
 cat <<EOF >${create_sql}
 CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;
 EOF
