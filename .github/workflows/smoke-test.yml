@@ -28,7 +28,7 @@ jobs:
           then
             cd bitnami
           fi
-          make image PG_VER=pg${{ matrix.pg }} TAG_VERSION=smoketest-image
+          make image PG_VER=pg${{ matrix.pg }} TAG_VERSION=smoketest-image BETA=1
 
       - name: Install psql
         run: apt install postgresql-client

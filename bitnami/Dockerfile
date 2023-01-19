@@ -25,12 +25,14 @@ FROM ${PREV_IMAGE} AS oldversions
 # there are also many upgrade/downgrade files per version, so just keep more of
 # them.
 USER 0
-RUN rm -vf $(pg_config --sharedir)/extension/timescaledb*mock*.sql \
-    && rm -vf $(ls -1 $(pg_config --pkglibdir)/timescaledb-tsl-*.so | head -n -5) \
-    && rm -vf $(ls -1 $(pg_config --pkglibdir)/timescaledb-[0-9]*.so | head -n -5) \
-    && rm -vf $(ls -1 $(pg_config --sharedir)/extension/timescaledb--*.sql | head -n -20) \
-    && ls $(pg_config --sharedir)/extension/timescaledb--*.sql \
-    && ls $(pg_config --pkglibdir)/timescaledb-*.so
+RUN set +o pipefail \
+    && rm -vf $(pg_config --sharedir)/extension/timescaledb*mock*.sql \
+    && rm -vf $(ls -1t $(pg_config --pkglibdir)/timescaledb-tsl-*.so | head -n -5) \
+    && rm -vf $(ls -1t $(pg_config --pkglibdir)/timescaledb-[0-9]*.so | head -n -5) \
+    && rm -vf $(ls -1t $(pg_config --sharedir)/extension/timescaledb--*.sql | head -n -20) \
+    && { ls $(pg_config --sharedir)/extension/timescaledb--*.sql \
+      ; ls $(pg_config --pkglibdir)/timescaledb-*.so \
+      ; : ; }
 
 ############################
 # Now build image and copy in tools
