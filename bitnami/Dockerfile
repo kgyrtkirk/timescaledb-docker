@@ -30,9 +30,7 @@ RUN rm -f $(pg_config --sharedir)/extension/timescaledb*mock*.sql \
 # Now build image and copy in tools
 ############################
 ARG PG_VERSION
-# r0 r6 r9 r11
-FROM bitnami/postgresql:12.13.0-debian-11-r10
-#FROM bitnami/postgresql:${PG_VERSION}.12.0
+FROM bitnami/postgresql:${PG_VERSION}
 ARG PG_VERSION
 
 LABEL maintainer="Timescale https://www.timescale.com"
