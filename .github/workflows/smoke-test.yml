@@ -20,7 +20,7 @@ jobs:
         type: ['normal', 'bitnami']
     steps:
       - name: Check out the source
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Build Docker Image for TimescaleDB
         run:
