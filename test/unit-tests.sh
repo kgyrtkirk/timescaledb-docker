@@ -6,7 +6,7 @@ echo "waiting for db"
 /wait
 
 psql -l
-dropdb test
+dropdb --if-exists test
 createdb test
 
 psql -b -v ON_ERROR_STOP=1 test <<EOF
