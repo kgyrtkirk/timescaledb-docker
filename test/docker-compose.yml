@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    image: timescaledev/timescaledb:latest-pg12-bitnami
+    environment:
+    - POSTGRESQL_PASSWORD=test
+  app:
+    #image: debian
+    build:
+      context: .
+      dockerfile: PgClientDockerfile
+    environment:
+    - PGDATABASE=postgres
+    - PGHOST=db
+    - PGPORT=5432
+    - PGUSER=postgres
+    - PGPASSWORD=test
