@@ -1,4 +1,4 @@
-name: Release Docker Image
+name: Test docker image
 on:
 #  push:
 #    branches: [ release_docker, dev-build ]
@@ -30,7 +30,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Build and push amd64 Docker image for TimescaleDB bitnami
+    - name: Build TimescaleDB bitnami
       run: make image ORG=$ORG PG_VER=pg${{ matrix.pg }} TS_VERSION=$TS_VERSION
       working-directory: bitnami
     - name: Tests
