@@ -8,7 +8,7 @@ on:
   pull_request:
 env:
   ORG: timescaledev
-  TS_VERSION: ${{ github.event.inputs.version || '2.9.1' }}
+  TS_VERSION: ${{ github.event.inputs.version || '2.8.1' }}
 jobs:
 
   # Build bitnami images of TimscaleDB.
