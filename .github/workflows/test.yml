@@ -1,7 +1,5 @@
 name: Test docker image
 on:
-#  push:
-#    branches: [ release_docker, dev-build ]
   workflow_dispatch:
     inputs:
       version:
@@ -10,7 +8,7 @@ on:
   pull_request:
 env:
   ORG: timescale
-  TS_VERSION: ${{ github.event.inputs.version || '2.8.1' }}
+  TS_VERSION: ${{ github.event.inputs.version || '2.9.1' }}
 jobs:
 
   # Build bitnami images of TimscaleDB.

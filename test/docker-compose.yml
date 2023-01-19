@@ -2,11 +2,9 @@ version: '3'
 services:
   db:
     image: "${ORG:-timescaledev}/timescaledb:${TS_VERSION:?set ts version}-pg${PG_VER:?set postgres version}-bitnami"
-    #image: timescaledev/timescaledb:latest-pg12-bitnami
     environment:
     - POSTGRESQL_PASSWORD=test
   app:
-    #image: debian
     build:
       context: .
       dockerfile: PgClientDockerfile
