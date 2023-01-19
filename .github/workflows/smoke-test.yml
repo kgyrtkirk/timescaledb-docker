@@ -15,8 +15,9 @@ jobs:
     name: PG${{ matrix.pg }}-${{ matrix.type }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        pg: [15]
+        pg: [14]
         type: ['normal', 'bitnami']
     steps:
       - name: Check out the source
