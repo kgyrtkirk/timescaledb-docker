@@ -1,0 +1,38 @@
+name: Test docker image
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release'
+        required: true
+  pull_request:
+env:
+  ORG: timescaledev
+  TS_VERSION: ${{ github.event.inputs.version || '2.8.1' }}
+jobs:
+
+  # Build bitnami images of TimscaleDB.
+  # The images are built only for amd64, since it is the only supported architecture in the base image bitname/postgresql.
+  # The images are only built for TSL code.
+  timescaledb-bitnami:
+
+    name: PG${{ matrix.pg }}-bitnami
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pg: [12, 13, 14]
+    env:
+      PG_VER: ${{ matrix.pg }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build TimescaleDB bitnami
+      run: make image ORG=$ORG PG_VER=pg${{ matrix.pg }} TS_VERSION=$TS_VERSION
+      working-directory: bitnami
+    - name: Tests
+      uses: cloudposse/github-action-docker-compose-test-run@main
+      with:
+        file: test/docker-compose.yml
+        service: app
+        command: test/unit-tests.sh
+

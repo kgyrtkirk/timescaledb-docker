@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    image: "${ORG:-timescaledev}/timescaledb:${TS_VERSION:?set ts version}-pg${PG_VER:?set postgres version}-bitnami"
+    environment:
+    - POSTGRESQL_PASSWORD=test
+  app:
+    build:
+      context: .
+      dockerfile: PgClientDockerfile
+    environment:
+    - WAIT_HOSTS=db:5432
+    - PGDATABASE=postgres
+    - PGHOST=db
+    - PGPORT=5432
+    - PGUSER=postgres
+    - PGPASSWORD=test
