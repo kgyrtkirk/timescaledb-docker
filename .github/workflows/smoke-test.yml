@@ -36,7 +36,7 @@ jobs:
 
       - name: Run the smoke test
         run: |
-          set -xeu
+          set -eu
           export PGHOST=localhost
           export PGUSER=postgres
           export PGPASSWORD=test1234
@@ -54,7 +54,6 @@ jobs:
             then
               break
             fi
-            echo .
             sleep 1
           done
           if ! psql -c "select 1"
