@@ -10,6 +10,8 @@ services:
       context: .
       dockerfile: PgClientDockerfile
     environment:
+      WAIT_HOSTS: db:5432
+    environment:
     - PGDATABASE=postgres
     - PGHOST=db
     - PGPORT=5432
