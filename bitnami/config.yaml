@@ -1,0 +1,14 @@
+schemaVersion: '2.0.0' # Make sure to test the latest schema version
+globalEnvVars:
+    - key: POSTGRESQL_PASSWORD
+      value: test
+commandTests:
+  - name: "set"
+    command: "bash"
+    args: ["-c","set"]
+    expectedOutput: ["/env/bin/gunicorn"]
+  - name: "psql -l"
+    setup: [["/opt/bitnami/scripts/postgresql/entrypoint.sh"]]
+    command: "psql"
+    args: ["-U","postgres","-l"]
+    expectedOutput: ["/env/bin/gunicorn"]
