@@ -40,7 +40,7 @@ jobs:
           export PGPASSWORD=test1234
           docker container stop smoketest-container || true
           docker container rm smoketest-container || true
-          docker run -e POSTGRESQL_PASSWORD=${PGPASSWORD} --name smoketest-container smoketest-image
+          docker run -d -e POSTGRES_PASSWORD=${PGPASSWORD} --name smoketest-container smoketest-image
           for _ in {1..120}
           do
             if [ -z "$(docker container ls -q --filter name=smoketest-container) ]
@@ -60,3 +60,8 @@ jobs:
             echo "Cannot connect to PostgreSQL"
             exit 1
           fi
+
+      - name: Show the logs
+        if: always()
+        run: |
+          docker logs smoketest-container
